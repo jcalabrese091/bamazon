@@ -4,7 +4,7 @@ var inquirer = require("inquirer");
 // create the connection information for the sql database
 var connection = mysql.createConnection({
   host: "localhost",
-  port: 8080,
+  port: 3000,
 
   // Your username
   user: "root",
@@ -16,7 +16,10 @@ var connection = mysql.createConnection({
 
 // connect to the mysql server and sql database
 connection.connect(function(err) {
-  if (err) throw err;
+  if (err){
+  console.log(err);
+  return
+}
   // run the start function after the connection is made to prompt the user
   start();
 });
@@ -49,7 +52,9 @@ function start() {
         },{
           id: answerId
           }
-        }]);
+        ], function(err,res){   
+        }
+        );
         if (res[i].id == answerId && res[i].stock_quantity >= answerHow) 
         console.log("order complete");
         else if(res[i].id !== answerId || res[i].stock_quantity < answerHow)
