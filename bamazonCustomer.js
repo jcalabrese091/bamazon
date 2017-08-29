@@ -50,9 +50,10 @@ function start() {
           id: answerId
           }
         }]);
-        if (res[i].id == answerId && res[i].stock_quantity =< answerHow) 
+        if (res[i].id == answerId && res[i].stock_quantity >= answerHow) 
         console.log("order complete");
-        else if()    
+        else if(res[i].id !== answerId || res[i].stock_quantity < answerHow)
+        console.log("out of stock");    
       // based on their answer, either call the bid or the post functions
       // if (answer.start.toLowerCase() === "") {
       //   postAuction();
@@ -60,6 +61,7 @@ function start() {
       // else {
       //   bidAuction();
       // }
+      connection.end();
     });
   }); 
 }
